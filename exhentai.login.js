@@ -11,7 +11,7 @@
 // @run-at              (document-end || document-start || document-ready)
 // @include-jquery      true
 // @use-greasemonkey    (true || false)
-// @version             0.0.1
+// @version             0.0.2
 // ==/UserScript==
 
 // WARNING: If you save this Userscript, it will be immediately active
@@ -23,7 +23,7 @@ function t(){
     var username = encodeURIComponent($('#username').val());
 	var password = encodeURIComponent($('#password').val());
     
-    alert(username);
+    alert(jQuery.fn.jquery);
 }
 function init(){
 
