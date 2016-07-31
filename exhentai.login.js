@@ -3,7 +3,7 @@
 // @namespace      {e.g. your website}
 // @author         qw4wer
 // @description    {Userscript description}
-// @include         https://exhentai.org/*
+// @include         exhentai.org/*
 // @clean-include       (true || false)
 // if it's > true < , USI will not change any of your @includes
 // 
