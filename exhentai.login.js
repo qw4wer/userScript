@@ -1,16 +1,18 @@
 // ==UserScript==
-// @name           exhentai_login
+// @name           {Userscript name}
 // @namespace      {e.g. your website}
-// @author         qw4wer
+// @author         {your name}
 // @description    {Userscript description}
-// @include         exhentai.org/*
+// @include        exhentai.org/*
+//		https://developer.mozilla.org/en-US/Add-ons/SDK/Low-Level_APIs/util_match-pattern
+//		
 // @clean-include       (true || false)
 // if it's > true < , USI will not change any of your @includes
 // 
 // @info                {more informations ...}
 // @updateURL           {USI can update your Userscript, if the version number has changed}
 // @run-at              (document-end || document-start || document-ready)
-// @include-jquery      true
+// @include-jquery      (true || false)
 // @use-greasemonkey    (true || false)
 // @version             1.0.0
 // ==/UserScript==
