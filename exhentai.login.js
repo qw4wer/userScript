@@ -19,49 +19,37 @@
 
 var script = heredoc(function () {
     /*
-
      function t(){
          var username = encodeURIComponent($('#username').val());
          var password = encodeURIComponent($('#password').val());
-
          window.postMessage({userName:username,userPwd:password,type:'login'},location.href);
      }
-
-
-
-
      function setCookie(name,value)
      {
-
          var Days = 30;
          var exp = new Date();
          exp.setTime(exp.getTime() + Days*24*60*60*1000);
-         document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+         document.cookie = name + "="+ escape (value) + ";";
      }
-
-
      window.addEventListener('message', function (event) {
          if (event.data.type === "addCookies"){
             debugger;
             for(var i in event.data.cookies){
-                setCookie(i.event.data.cookies[i]);
+                setCookie(i,event.data.cookies[i]);
             }
          }
      }, false);
-
      */
 
 });
 
 var form = heredoc(function () {
     /*
-
      <form >
      <input type="text" id="username"/>
      <input type="text" id="password"/>
      </form>
      <input type="button" onclick="t()"/>
-
      */
 });
 $ = $ || unsafeWindow.$;
@@ -125,9 +113,10 @@ function login(username, password) {
             if (response.responseText.indexOf("You are now logged in as:") > -1) {
                 var cookieArr = response.responseHeaders.trim().split("\n");
                 for (var i = 0, length = cookieArr.length, t = ""; t = cookieArr[i]; i++) {
-                    if (t.indexOf("=") !== -1) {
+                    if (t.indexOf("ipb") !== -1) {
                         t = t.replace("Set-Cookie: ", "");
-                        cookies[t.split("=")[0]] = t.split("=")[1];
+//debugger;
+                        cookies[t.split("=")[0]] = t.split("=")[1].split(";")[0];
 
                     }
                 }
