@@ -5,7 +5,6 @@
 // @description  try to take over the world!
 // @author       qw4wer
 // @include https://exhentai.org/s/*
-
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
@@ -13,10 +12,7 @@
 // @clean-include       (true || false)
 // if it's > true < , USI will not change any of your @includes
 // @info                {more informations ...}
-// @updateURL            https://raw.githubusercontent.com/qw4wer/userScript/master/exhentai.login.js
-// @run-at              (document-end || document-start || document-ready)
-// @include-jquery      true
-
+// @run-at              document-ready
 // @use-greasemonkey    (true || false)
 // @version             0.0.2
 // ==/UserScript==
@@ -40,7 +36,7 @@ document = document || unsafeWindow.document;
 })();
 
 function loadTools() {
-    $("#i1 h1").append("<input type='button' onclick='method(this)'/>");
+    $("#i1 h1").append("<input type='button' onclick='method(this)' value='加载'/>");
     loadJs(method.toString()+reloadImg.toString());
 }
 

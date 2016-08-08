@@ -1,55 +1,65 @@
 // ==UserScript==
 // @name           exhentai_login
-// @namespace      {e.g. your website}
 // @author         qw4wer
-// @description    {Userscript description}
-// @include https://exhentai.org/*
+// @description    exhentai login
+// @include https://exhentai.org
 // @clean-include       (true || false)
 // if it's > true < , USI will not change any of your @includes
-// @info                {more informations ...}
-// @updateURL            https://raw.githubusercontent.com/qw4wer/userScript/master/exhentai.login.js
-// @run-at              (document-end || document-start || document-ready)
-// @include-jquery      true
+// @info                exhentai login
+// @run-at              document-ready
+// @require https://code.jquery.com/jquery-1.12.4.min.js
 // @grant GM_xmlhttpRequest
 // @use-greasemonkey    (true || false)
-// @version             0.0.2
+// @version             0.0.3
 // ==/UserScript==
 
 // WARNING: If you save this Userscript, it will be immediately active
 
 var script = heredoc(function () {
     /*
+
      function t(){
-         var username = encodeURIComponent($('#username').val());
-         var password = encodeURIComponent($('#password').val());
-         window.postMessage({userName:username,userPwd:password,type:'login'},location.href);
+     var username = encodeURIComponent($('#username').val());
+     var password = encodeURIComponent($('#password').val());
+
+     window.postMessage({userName:username,userPwd:password,type:'login'},location.href);
      }
+
+
+
+
      function setCookie(name,value)
      {
-         var Days = 30;
-         var exp = new Date();
-         exp.setTime(exp.getTime() + Days*24*60*60*1000);
-         document.cookie = name + "="+ escape (value) + ";";
+
+     var Days = 30;
+     var exp = new Date();
+     exp.setTime(exp.getTime() + Days*24*60*60*1000);
+     document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
      }
+
+
      window.addEventListener('message', function (event) {
-         if (event.data.type === "addCookies"){
-            debugger;
-            for(var i in event.data.cookies){
-                setCookie(i,event.data.cookies[i]);
-            }
-         }
+     if (event.data.type === "addCookies"){
+     debugger;
+     for(var i in event.data.cookies){
+     setCookie(i.event.data.cookies[i]);
+     }
+     }
      }, false);
+
      */
 
 });
 
 var form = heredoc(function () {
     /*
+
      <form >
      <input type="text" id="username"/>
      <input type="text" id="password"/>
      </form>
      <input type="button" onclick="t()"/>
+
      */
 });
 $ = $ || unsafeWindow.$;
@@ -113,10 +123,9 @@ function login(username, password) {
             if (response.responseText.indexOf("You are now logged in as:") > -1) {
                 var cookieArr = response.responseHeaders.trim().split("\n");
                 for (var i = 0, length = cookieArr.length, t = ""; t = cookieArr[i]; i++) {
-                    if (t.indexOf("ipb") !== -1) {
+                    if (t.indexOf("=") !== -1) {
                         t = t.replace("Set-Cookie: ", "");
-//debugger;
-                        cookies[t.split("=")[0]] = t.split("=")[1].split(";")[0];
+                        cookies[t.split("=")[0]] = t.split("=")[1];
 
                     }
                 }
