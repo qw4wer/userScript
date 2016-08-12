@@ -2,16 +2,14 @@
 // @name         exhentai
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
+// @description  exhentai load more pic
 // @author       qw4wer
 // @include https://exhentai.org/s/*
 // @grant       unsafeWindow
 // @grant       GM_xmlhttpRequest
 // @grant       GM_addStyle
 // @run-at      document-idle
-// @clean-include       (true || false)
-// if it's > true < , USI will not change any of your @includes
-// @info                {more informations ...}
+// @info                exhentai load more pic
 // @run-at              document-ready
 // @use-greasemonkey    (true || false)
 // @version             0.0.2
