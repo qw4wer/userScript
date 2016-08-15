@@ -27,7 +27,7 @@ var html = {
     var href = location.href;
 
     if (href.indexOf("ranking_area") !== -1) {
-
+        initRankingArea();
     } else if (href.indexOf("member_illust") !== -1) {
 
 
@@ -42,11 +42,12 @@ function initRankingArea() {
 
     $(document.body).append(html);
 
-    $(".layout-body ._layout-thumbnail img").mouseenter(function(event){
+    $(".layout-body ._layout-thumbnail").mouseenter(function (event) {
+        var img = $("<img>").attr("src", $("img", event.target).attr("src").replace("150x150", "600x600"));
+        $("#original_image").append(img).css({left: event.pageX, top: event.pageY}).show();
+    }).mouseleave(function (event) {
+        $("#original_image").empty().hide();
 
-
-        $("<img>").attr("src",event.target.src);;
-        $("#original_image").append()
     });
 }
 
