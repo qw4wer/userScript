@@ -8,6 +8,7 @@
 // @run-at			document-ready
 // @grant           GM_xmlhttpRequest
 // @grant           GM_openInTab
+// @grant           GM_log
 // ==/UserScript==
 
 
@@ -16,22 +17,26 @@
 
     $(document).on("click", "#content_left .t a", function (event) {
 
+
         var url = "";
         if (url = $(event.target).data('url')) {
             GM_openInTab(url);
         } else {
-            GM_xmlhttpRequest({
-                method: "get",
-                url: event.target.href,
-                onload: function (data) {
-                    url = data.responseText.match(regx)[0];
-                    $(event.target).data({url: url}).css("color", 'black');
-                    setTimeout(function () {
+            url = event.target.href ? event.target.href : event.target.parentNode.href;
+            if (url.indexOf("www.baidu.com") === -1) {
+                GM_openInTab(url);
+            } else {
+                GM_xmlhttpRequest({
+                    method: "get",
+                    url: url,
+                    onload: function (data) {
+                        url = data.responseText.match(regx)[0];
+                        $(event.target).data({url: url}).css("color", 'black');
                         GM_openInTab(url);
-                    }, 1);
-                }
+                    }
 
-            });
+                });
+            }
         }
 
         event.preventDefault();

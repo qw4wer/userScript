@@ -3,7 +3,7 @@
 // @author			qw4wer
 // @version			0.0.1
 // @description		p站用户工具、各种杂七杂八的功能
-// @include			/www\.pixiv\.net/(ranking_area|member_illust)/
+// @include			/www\.pixiv\.net/(ranking_area|member_illust|ranking)/
 // @icon			http://www.pixiv.net/favicon.ico
 // @run-at			document-ready
 // @namespace https://greasyfork.org/users/28141
@@ -31,10 +31,40 @@ var html = {
     } else if (href.indexOf("member_illust") !== -1) {
 
 
+    } else if (href.indexOf("ranking") !== -1) {
+        initRanking();
     }
 
 })();
 
+function initRanking() {
+
+    var html = heredoc(function () {
+        /*<div id="original_image" style="display: none; position: absolute; z-index: 1; left: 155px; top: 164px;"></div>*/
+    });
+
+    $(document.body).append(html);
+
+    var timer = undefined;
+
+    $(".ranking-items ._layout-thumbnail").mouseenter(function (event) {
+        timer = setTimeout(function () {
+            debugger;
+            var img = $("<img>").attr("src", $("img", event.target).attr("src").replace("240x480", "600x600"));
+            $("#original_image").empty().append(img).css({
+                left: event.pageX,
+                top: event.pageY
+            }).show().mouseleave(function (event) {
+                $("#original_image").empty().hide();
+            });
+        }, 500);
+    }).mouseleave(function (event) {
+        //$("#original_image").empty().hide();
+        clearTimeout(timer);
+    });
+
+
+}
 function initRankingArea() {
     var html = heredoc(function () {
         /*<div id="original_image" style="display: none; position: absolute; z-index: 1; left: 155px; top: 164px;"></div>*/
@@ -42,12 +72,24 @@ function initRankingArea() {
 
     $(document.body).append(html);
 
-    $(".layout-body ._layout-thumbnail").mouseenter(function (event) {
-        var img = $("<img>").attr("src", $("img", event.target).attr("src").replace("150x150", "600x600"));
-        $("#original_image").append(img).css({left: event.pageX, top: event.pageY}).show();
-    }).mouseleave(function (event) {
-        $("#original_image").empty().hide();
+    var timer = undefined;
 
+    $(".layout-body ._layout-thumbnail").mouseenter(function (event) {
+
+
+        timer = setTimeout(function () {
+            var img = $("<img>").attr("src", $("img", event.target).attr("src").replace("150x150", "600x600"));
+            $("#original_image").empty().append(img).css({
+                left: event.pageX,
+                top: event.pageY
+            }).show().mouseleave(function (event) {
+                $("#original_image").empty().hide();
+            });
+        }, 500);
+
+    }).mouseleave(function (event) {
+        //$("#original_image").empty().hide();
+        clearTimeout(timer);
     });
 }
 
