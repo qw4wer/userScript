@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         exhentai
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  exhentai load more pic
 // @author       qw4wer
 // @include https://exhentai.org/s/*
@@ -16,7 +16,7 @@
 // ==/UserScript==
 
 
-$ = $ || unsafeWindow.$;
+//$ = $ || unsafeWindow.$;
 document = document || unsafeWindow.document;
 (function () {
     var isOther = location.href.indexOf('https://exhentai.org/s') == -1;
@@ -24,7 +24,7 @@ document = document || unsafeWindow.document;
     if (!isOther) {
         setTimeout(function () {
             init();
-            loadTools();
+           
         }, 2000);
 
     } else {
@@ -92,6 +92,7 @@ function init() {
         synchronous: false,
         onload: function (response) {
             loadJs(response.responseText);
+             loadTools();
         }
     });
 
