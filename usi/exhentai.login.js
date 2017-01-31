@@ -98,7 +98,7 @@ $ = $ || unsafeWindow.$;
 document = document || unsafeWindow.document;
 
 (function() {
-	var isOther = location.href.indexOf('https://exhentai.org') == -1;
+	var isOther = location.href.indexOf('exhentai.org') === -1;
 
 	if (!isOther) {
 		init();
