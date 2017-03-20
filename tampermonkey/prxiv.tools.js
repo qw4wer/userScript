@@ -47,23 +47,21 @@ function initRanking() {
 
     var timer = undefined;
 
-    $(".ranking-items ._layout-thumbnail").mouseenter(function (event) {
+    $(document).on("mouseenter", ".ranking-items ._layout-thumbnail", function (event) {
+
+
         timer = setTimeout(function () {
-            debugger;
             var img = $("<img>").attr("src", $("img", event.target).attr("src").replace("240x480", "600x600"));
             $("#original_image").empty().append(img).css({
                 left: event.pageX,
                 top: event.pageY
             }).show().mouseleave(function (event) {
                 $("#original_image").empty().hide();
-            });
+            })
         }, 500);
-    }).mouseleave(function (event) {
-        //$("#original_image").empty().hide();
+    }).on("mouseleave", ".layout-body ._layout-thumbnail", function (event) {
         clearTimeout(timer);
     });
-
-
 }
 function initRankingArea() {
     var html = heredoc(function () {
@@ -74,7 +72,7 @@ function initRankingArea() {
 
     var timer = undefined;
 
-    $(".layout-body ._layout-thumbnail").mouseenter(function (event) {
+    $(document).on("mouseenter", ".layout-body ._layout-thumbnail", function (event) {
 
 
         timer = setTimeout(function () {
@@ -86,9 +84,7 @@ function initRankingArea() {
                 $("#original_image").empty().hide();
             });
         }, 500);
-
-    }).mouseleave(function (event) {
-        //$("#original_image").empty().hide();
+    }).on("mouseleave", ".layout-body ._layout-thumbnail", function (event) {
         clearTimeout(timer);
     });
 }

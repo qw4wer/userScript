@@ -27,7 +27,7 @@ document = document || unsafeWindow.document;
     if (!isOther) {
         setTimeout(function () {
             init();
-           
+
         }, 2000);
 
     } else {
@@ -38,31 +38,31 @@ document = document || unsafeWindow.document;
 
 function loadTools() {
     $("#i1 h1").append("<input type='button' onclick='method(this)' value='加载'/>");
-    loadJs(method.toString()+reloadImg.toString()+nl.toString() +onErrorReload.toString());
+    loadJs(method.toString() + reloadImg.toString() + nl.toString() + onErrorReload.toString());
 }
 
-function reloadImg(img){
+function reloadImg(img) {
     //$(img).parent().append($(img).next().remove());
 
-    $(img).next().attr("src",$(img).next().attr("src")+"?t="+Date.parse(new Date()));
+    $(img).next().attr("src", $(img).next().attr("src") + "?t=" + Date.parse(new Date()));
 }
 
-function onErrorReload(event){
-$(event.target).attr('src',$(event.target).attr("src")+"?t="+Date.parse(new Date()));
+function onErrorReload(event) {
+    $(event.target).attr('src', $(event.target).attr("src") + "?t=" + Date.parse(new Date()));
 }
 
 function nl(a) {
-return false;
+    return false;
 }
 
 function method(btn) {
-    $(btn).attr("disabled","disabled");
-    
-    $("#i1").css({width:'auto',maxWidth:''});
-    
+    $(btn).attr("disabled", "disabled");
+
+    $("#i1").css({width: 'auto', maxWidth: ''});
+
     var div = $("<div><span style='width: 10px;height: 10px;background-color: red;display: inline;position: absolute' onclick='reloadImg(this)'></span></div>");
 
-    var max = $("#i2 div a:last").attr('href').substring($("#i2 div a:last").attr('href').indexOf("-")+1);
+    var max = $("#i2 div a:last").attr('href').substring($("#i2 div a:last").attr('href').indexOf("-") + 1);
 
     var nextPage = $("#i2 div a:eq(2)").attr("href");
 
@@ -73,26 +73,25 @@ function method(btn) {
     $("#i3").append(div.clone().append(first));
 
     var arr = [];
-    loadImage(nextPage,arr);
-    function loadImage(url,arr){
+    loadImage(nextPage, arr);
+    function loadImage(url, arr) {
         $.ajax({
-            url:url,
-            dataType:'html',
-            async:true,
-            success:function(data){
-                arr.push($("#i3 img",data));
-                $("#i3 div:last").after(div.clone().append($("#i3 img",data).removeAttr("onerror").attr('onerror',"onErrorReload(this)")));
-                var next = $("#i2 div a:eq(2)",data).attr("href");
-                var page = next.substring(next.indexOf("-")+1);
-                if(parseInt(page)  < parseInt(max))
-                    setTimeout(loadImage(next,arr),1500);
+            url: url,
+            dataType: 'html',
+            async: true,
+            success: function (data) {
+                arr.push($("#i3 img", data));
+                $("#i3 div:last").after(div.clone().append($("#i3 img", data).removeAttr("onerror").attr('onerror', "onErrorReload(this)")));
+                var next = $("#i2 div a:eq(2)", data).attr("href");
+                var page = next.substring(next.indexOf("-") + 1);
+                if (parseInt(page) < parseInt(max))
+                    setTimeout(loadImage(next, arr), 1500);
 
             }
 
         });
     }
 }
-
 
 
 function init() {
@@ -102,7 +101,7 @@ function init() {
         synchronous: false,
         onload: function (response) {
             loadJs(response.responseText);
-             loadTools();
+            loadTools();
         }
     });
 
@@ -117,27 +116,25 @@ function loadJs(jsStr) {
     oScript.text = jsStr;
     oHead.appendChild(oScript);
 }
-    var arr = [];
-    loadImage(nextPage,arr);
-    function loadImage(url,arr){
-        $.ajax({
-            url:url,
-            dataType:'html',
-            async:true,
-            success:function(data){
-                arr.push($("#i3 img",data));
-                $("#i3 div:last").after(div.clone().append($("#i3 img",data)));
-                var next = $("#i2 div a:eq(2)",data).attr("href");
-                var page = next.substring(next.indexOf("-")+1);
-                if(parseInt(page)  < parseInt(max))
-                    setTimeout(loadImage(next,arr),1500);
+var arr = [];
+loadImage(nextPage, arr);
+function loadImage(url, arr) {
+    $.ajax({
+        url: url,
+        dataType: 'html',
+        async: true,
+        success: function (data) {
+            arr.push($("#i3 img", data));
+            $("#i3 div:last").after(div.clone().append($("#i3 img", data)));
+            var next = $("#i2 div a:eq(2)", data).attr("href");
+            var page = next.substring(next.indexOf("-") + 1);
+            if (parseInt(page) < parseInt(max))
+                setTimeout(loadImage(next, arr), 1500);
 
-            }
+        }
 
-        });
-    }
+    });
 }
-
 
 
 function init() {
